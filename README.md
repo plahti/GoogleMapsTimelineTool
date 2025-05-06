@@ -1,18 +1,19 @@
 # Visit Locator - Python Script
 
-Tämä Python-skripti analysoi paikkatietoja (semanttisia segmenttejä) ja palauttaa niistä tietoa paikkakäynneistä, jotka sijaitsevat tietyllä etäisyydellä määritellyistä koordinaateista. Skripti käyttää `geopy`-kirjastoa paikkatietojen käsittelyyn ja Nominatim-geokooderia osoitteiden hakemiseen.
+Tämä Python-skripti analysoi Google Mapsin Aikajanasta saatavia paikkatietoja (semanttisia segmenttejä) ja palauttaa niistä tietoa paikkakäynneistä, jotka sijaitsevat tietyllä etäisyydellä määritellyistä koordinaateista. Skripti käyttää `geopy`-kirjastoa paikkatietojen käsittelyyn ja Nominatim-geokooderia osoitteiden hakemiseen.
 
 Alle viiden minuutin käyntejä ei huomioida, ne katsotaan paikan ohi ajamiseksi. 
 
-Jos samassa paikassa ollaan 24 h sisällä uudestaan, se katsotaan samaksi käynniksi.
+Jos samassa paikassa ollaan 24 h sisällä uudestaan, se katsotaan yhdeksi käynniksi.
 
-Sijainneista lasketaan keskiarvo ja osoite määritellään sen perusteella.
+Sijainneista lasketaan yksinkertaisella tavalla keskiarvo ja tulostettava osoite määritellään sen 
+perusteella. Se saattaa olla eri kuin koordinaattien osoite, varsinkin jo olet liikkunut alueen sisällä.
 
 Ohjelman toimintalogiikka on varsin yksinkertainen ja se saattaa joissain tilanteissa aiheuttaa virheitä.
 
 ## Ominaisuudet
 
-- Analysoi paikkatiedot (JSON-formaatissa).
+- Analysoi Google Mapsin Aikajanatoiminnon paikkatiedot (JSON-formaatissa).
 - Palauttaa vierailut, jotka sijaitsevat annetun koordinaatin säteellä.
 - Käyttää paikallista kieltä (tai englantia) osoitteiden palauttamiseen.
 - Välimuistittaa geokoodauskutsut parantamaan suorituskykyä.
@@ -32,11 +33,13 @@ pip install geopy
 python3 find_visits_at_locations.py <data.json> <latitude> <longitude> <distance>
 ```
 
-Esimerkkinä käynnit Helsingissä. Kaikki alle 3000 m sisällä olevat pisteet lasketaan samaksi paikaksi.
+Esimerkkinä käynnit Helsingissä, katsotaan kaikki alle 3000 m sisällä olevat pisteet samaksi paikaksi.
 
 ```
 python3 find_visits_at_locations.py <data.json> 60.169269 24.942484 3000
 ```
+
+Lisää esimerkkejä löydät tiedostosta `do_example_tests`.
 
 ## Apuohjelmat
 
@@ -95,11 +98,7 @@ If you're not using Google Maps for location tracking, you may need to refer to 
 ## Finding coordinates Easily:
 
 To get precise coordinates (latitude and longitude), in Scandinavia you can use the Eniro Map:
-
 Visit Eniro Map https://kartor.eniro.se/ to find a location.
-
-Enter the desired location on the map to get its coordinates using coordinate tool in right bottom corner.
-
+Enter the desired location on the map to get its coordinates using coordinate tool in right bottom corner. 
 Copy the coordinates for use in your timeline processing.
-
 Example: Coordinates for Turku, Finland are: 60.451581 22.275494.
