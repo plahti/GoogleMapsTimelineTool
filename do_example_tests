@@ -1,0 +1,22 @@
+#!/bin/bash
+
+SCR=./find_visits_at_locations.py
+
+TIMELINEDATA=merged.json
+
+echo Turun tuomiokirkko
+python3 $SCR ${TIMELINEDATA} 60.452118 22.277645 100
+
+echo Vanha Suurtori
+python3 $SCR ${TIMELINEDATA} 60.450843 22.275124 80
+
+echo Tukholma
+python3 $SCR ${TIMELINEDATA} 59.329512 18.06221 4200
+
+echo Helsinki
+python3 $SCR ${TIMELINEDATA} 60.169269 24.942484 3000
+
+echo Lontoo
+python3 $SCR ${TIMELINEDATA} 51.500278 -0.126111 30000
+
+# eof
